@@ -1,0 +1,24 @@
+﻿@model HospitalAppointments.Models.Appointment
+
+@{
+    ViewBag.Title = "Додади пациент";
+}
+
+<h2>Додади пациент кај @ViewBag.DoctorName</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.DoctorId)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.PatientId, "Пациент")
+        @Html.DropDownList("PatientId", null, "-- Избери пациент --",
+            new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.PatientId)
+    </div>
+
+    <button type="submit" class="btn btn-primary">Додади пациент</button>
+}
+
+<p>@Html.ActionLink("Назад кон докторот", "Details", new { id = Model.DoctorId })</p>
